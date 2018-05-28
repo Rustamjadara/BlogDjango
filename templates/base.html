@@ -1,5 +1,5 @@
+{% load staticfiles %}
 <!DOCTYPE html>
-
 <html>
 <head>
 	<title>
@@ -7,6 +7,7 @@
 		Vision Better India
 		{% endblock %}
 	</title>
+	<link rel='stylesheet' href='{% static "css/base.css" %}'/>
 </head>
 <body>
 	{% include "messages_show.html" %}
