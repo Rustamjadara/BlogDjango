@@ -16,8 +16,8 @@ def post_create(request):
 		instance.save()
 		messages.success(request,"Succesfully created.")
 		return HttpResponseRedirect(instance.get_absolute_url())
-	else:
-		messages.error(request,"Error!,Post Not created.")
+	#else:
+		#messages.error(request,"Error!,Post Not created.")
 	context = {
 		"form": form,
 	}
@@ -36,7 +36,7 @@ def post_list(request):
 		"object_list":queryset,
 		"title": "List"
 	}
-	return render(request,"index.html",context)
+	return render(request,"post_list.html",context)
 
 def post_update(request,id):
 	instance = get_object_or_404(Post,id=id)
@@ -47,8 +47,8 @@ def post_update(request,id):
 		messages.success(request,"Succesfully updated.")
 
 		return HttpResponseRedirect(instance.get_absolute_url())
-	else:
-		messages.error(request,"Error! Post Not Updated")
+	#else:
+		#messages.error(request,"Error! Post Not Updated")
 
 	context = {
 		"instance": instance,
