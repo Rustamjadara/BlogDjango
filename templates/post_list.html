@@ -1,12 +1,20 @@
 {% extends "base.html" %}				
 
+
 {% block content %}
 {% for obj in object_list %}
-<a href='{{ obj.get_absolute_url }}'>{{ obj.title }} </a> 
+<div class="row">
+<div class="card" style="width: 40rem;">
+  <!-- <img class="card-img-top" src=".../100px180/" alt="Card image cap"> -->
+  <div class="card-body">
+    <h2 class="card-title"><a href='{{ obj.get_absolute_url }}'>{{ obj.title }} </a></h2><small>Created:{{ obj.timestamp}} ago
+Updated:{{ obj.updated|timesince}} ago</small>
+    <p class="card-text">{{ obj.content|linebreaks|truncatechars:60 }}</p>
+    <a href="{{ obj.get_absolute_url }}" class="btn btn-primary">View Post</a>
+  </div>
+
+</div>
+</div>
 <br/>
-{{ obj.content}}    <br/>
-{{ obj.timestamp }} <br/>
-{{ obj.updated }}   <br/>
-{{ obj.id }}        <br/>
 {% endfor %}
 {% endblock %}

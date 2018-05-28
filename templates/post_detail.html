@@ -6,12 +6,14 @@
 
 
 {% block content %}
-<h1>{{title}} </h1>
+<div class="card" style="width: 40rem;">
+<h1>{{title}} </h1><small>
+	Created:{{ instance.timestamp }} 
+	Updated:{{ instance.updated }}  
+</small><br/>
 
-	{{ instance.title }}     <br/>
-	{{ instance.content}}    <br/>
-	{{ instance.timestamp }} <br/>
-	{{ instance.updated }}   <br/>
-	{{ instance.id }}        <br/>
-
+	
+	{{ instance.content}}    
+	
+</div>
 {% endblock %}
