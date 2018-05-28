@@ -1,0 +1,6 @@
+#CREATE -------POST
+
+#READ -----GET ---lIST /SEARCH
+
+#UPDATE--------PUT/PATCH---EDIT
+#DELETE--------DELETE
