@@ -1,20 +1,43 @@
 {% extends "base.html" %}				
 
-
-{% block content %}
-{% for obj in object_list %}
-<div class="row">
-<div class="card" style="width: 40rem;">
-  <!-- <img class="card-img-top" src=".../100px180/" alt="Card image cap"> -->
-  <div class="card-body">
-    <h2 class="card-title"><a href='{{ obj.get_absolute_url }}'>{{ obj.title }} </a></h2><small>Created:{{ obj.timestamp}} ago
-Updated:{{ obj.updated|timesince}} ago</small>
-    <p class="card-text">{{ obj.content|linebreaks|truncatechars:60 }}</p>
-    <a href="{{ obj.get_absolute_url }}" class="btn btn-primary">View Post</a>
-  </div>
-
 </div>
 </div>
 <br/>
-{% endfor %}
+
+{% block content %}
+
+<div class="row">
+	{% for obj in object_list %}
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+      	{% if obj.image %}
+		  <img class="card-img-top" src="{{ obj.image.url }}" alt="Card image cap">
+		{% endif %}
+        <h5 class="card-title"><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h5>
+        <small><span class="badge badge-pill badge-success">Created:{{ obj.timestamp|timesince}} ago</span>
+			   <span class="badge badge-pill badge-warning">Updated:{{ obj.updated|timesince}} ago</span></small>
+    <p class="card-text">{{ obj.content|linebreaks|truncatechars:60 }}</p>
+        <a href="{{ obj.get_absolute_url }}" class="btn btn-primary">View Post</a>
+      </div>
+    </div>
+  </div>   
+  {% endfor %}
+</div>
+
+	<div class="pagination">
+	    <span class="step-links">
+	        {% if object_list.has_previous %}
+	            <a href="?{{page_req_var}}={{ object_list.previous_page_number }}">previous</a>
+	        {% endif %}
+
+	        <span class="current">
+	            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+	        </span>
+
+	        {% if object_list.has_next %}
+	            <a href="?{{page_req_var}}={{ object_list.next_page_number }}">next</a>
+	        {% endif %}
+	    </span>
+	</div>
 {% endblock %}

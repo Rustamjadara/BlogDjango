@@ -5,15 +5,28 @@
 {% endblock %}
 
 
-{% block content %}
-<div class="card" style="width: 40rem;">
-<h1>{{title}} </h1><small>
-	Created:{{ instance.timestamp }} 
-	Updated:{{ instance.updated }}  
-</small><br/>
 
+
+
+{% block content %}
+<div class="row">
 	
-	{{ instance.content}}    
-	
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-body">
+      	
+        <h5 class="card-title"><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></h5>
+        <small><span class="badge badge-pill badge-success">Created:{{ instance.timestamp|timesince}} ago</span>
+			   <span class="badge badge-pill badge-warning">Updated:{{ instance.updated|timesince}} ago</span></small>
+    	<p class="card-text">{{ instance.content|linebreaks|truncatechars:60 }}</p>
+    	 {% if instance.image %}
+		  <img class="card-img-top" src="{{ instance.image.url }}" alt="Card image cap">
+		{% endif %}
+    	{{ instance.content}}  
+      
+      </div>
+    </div>
+  </div>   
 </div>
+
 {% endblock %}
