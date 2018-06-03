@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load urlify %}
 {% block head_title %}
 	{{ instance.title}} | {{ block.super }}
 {% endblock %}
@@ -11,14 +11,31 @@
 {% block content %}
 <div class="row">
 	
-  <div class="col-sm-8">
+  <div class="col-sm-10">
     <div class="card">
       <div class="card-body">
       	
         <h5 class="card-title"><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></h5>
+        {% if instance.user.get_full_name %}<a href="#" class="badge badge-info">Author: {{ instance.user.get_full_name }}</a>{% endif %}
         <small><span class="badge badge-pill badge-success">Created:{{ instance.timestamp|timesince}} ago</span>
 			   <span class="badge badge-pill badge-warning">Updated:{{ instance.updated|timesince}} ago</span></small>
-    	<p class="card-text">{{ instance.content|linebreaks|truncatechars:60 }}</p>
+				    		<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+				Facebook
+				</a>
+
+				<a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">
+				Twitter
+				</a>
+
+				<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
+
+
+				<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
+				Linkedin
+				</a>
+
+				<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">Reddit</a>
+
     	 {% if instance.image %}
 		  <img class="card-img-top" src="{{ instance.image.url }}" alt="Card image cap">
 		{% endif %}
